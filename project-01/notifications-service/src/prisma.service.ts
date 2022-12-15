@@ -1,5 +1,5 @@
 /**
- * file: src/ prisma.service.ts
+ * file: src/prisma.service.ts
  * date: 12/15/2022
  * description: file responsible for the connection with the database
  * using the Prisma ORM
