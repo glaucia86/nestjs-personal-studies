@@ -5,18 +5,27 @@
  * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
  */
 
+import { Notification } from "../notification";
 import { SendNotification } from "./send-notification";
+
+const notifications: Notification[] = [];
+
+const notificationsRepositoryMock = {
+  async create(notification: Notification) {
+    notifications.push(notification);
+  }
+}
 
 describe('Send Notification', () => {
   it('should be able to send a new notification', async () => {
-    const sendNotification = new SendNotification();
+    const sendNotification = new SendNotification(notificationsRepositoryMock);
 
-    const notification = await sendNotification.execute({
+    await sendNotification.execute({
       recipientId: '123456',
       content: 'You received a new friendship notification',
       category: 'social',
     });
 
-    expect(notification).toBeTruthy();
+    expect(notifications).toHaveLength(1);
   });
 });
