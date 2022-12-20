@@ -5,20 +5,14 @@
  * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
  */
 
-import { Notification } from "../notification";
+
+import { InMemoryNotificationsRepository } from "../../../../test/repositories/in-memory-notifications-repository";
 import { SendNotification } from "./send-notification";
-
-const notifications: Notification[] = [];
-
-const notificationsRepositoryMock = {
-  async create(notification: Notification) {
-    notifications.push(notification);
-  }
-}
 
 describe('Send Notification', () => {
   it('should be able to send a new notification', async () => {
-    const sendNotification = new SendNotification(notificationsRepositoryMock);
+    const notificationRepository = new InMemoryNotificationsRepository();
+    const sendNotification = new SendNotification(notificationRepository);
 
     await sendNotification.execute({
       recipientId: '123456',
@@ -26,6 +20,6 @@ describe('Send Notification', () => {
       category: 'social',
     });
 
-    expect(notifications).toHaveLength(1);
+    expect(notificationRepository.notifications).toHaveLength(1);
   });
 });

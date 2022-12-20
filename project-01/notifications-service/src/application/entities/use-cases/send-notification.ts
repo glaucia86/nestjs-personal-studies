@@ -7,7 +7,7 @@
 
 import { Notification } from './../notification';
 import { Content } from './../content';
-import { NotificationRepository } from 'src/application/repositories/notification-repositories';
+import { NotificationRepository } from 'src/application/repositories/notifications-repositories';
 
 interface SendNotificationRequest {
   recipientId: string;
