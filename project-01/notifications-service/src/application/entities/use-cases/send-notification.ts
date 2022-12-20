@@ -5,9 +5,10 @@
  * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
  */
 
+import { Injectable } from '@nestjs/common';
 import { Notification } from './../notification';
 import { Content } from './../content';
-import { NotificationRepository } from 'src/application/repositories/notifications-repositories';
+import { NotificationsRepository } from '../../repositories/notifications-repository';
 
 interface SendNotificationRequest {
   recipientId: string;
@@ -19,9 +20,10 @@ interface SendNotificationResponse {
   notification: Notification;
 }
 
+@Injectable()
 export class SendNotification {
 
-  constructor(private notificationRepository: NotificationRepository) { }
+  constructor(private notificationsRepository: NotificationsRepository) { }
 
   async execute(request: SendNotificationRequest): Promise<SendNotificationResponse> {
     const { recipientId, content, category } = request;
@@ -32,7 +34,7 @@ export class SendNotification {
       category,
     });
 
-    await this.notificationRepository.create(notification);
+    await this.notificationsRepository.create(notification);
 
     return {
       notification,

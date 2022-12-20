@@ -11,8 +11,8 @@ import { SendNotification } from "./send-notification";
 
 describe('Send Notification', () => {
   it('should be able to send a new notification', async () => {
-    const notificationRepository = new InMemoryNotificationsRepository();
-    const sendNotification = new SendNotification(notificationRepository);
+    const notificationsRepository = new InMemoryNotificationsRepository();
+    const sendNotification = new SendNotification(notificationsRepository);
 
     await sendNotification.execute({
       recipientId: '123456',
@@ -20,6 +20,6 @@ describe('Send Notification', () => {
       category: 'social',
     });
 
-    expect(notificationRepository.notifications).toHaveLength(1);
+    expect(notificationsRepository.notifications).toHaveLength(1);
   });
 });

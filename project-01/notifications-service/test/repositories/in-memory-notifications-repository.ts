@@ -5,10 +5,10 @@
  * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
  */
 
-import { NotificationRepository } from '../../src/application/repositories/notifications-repositories';
+import { NotificationsRepository } from '../../src/application/repositories/notifications-repository';
 import { Notification } from '../../src/application/entities/notification';
 
-export class InMemoryNotificationsRepository implements NotificationRepository {
+export class InMemoryNotificationsRepository implements NotificationsRepository {
   public notifications: Notification[] = [];
 
   async create(notification: Notification) {
