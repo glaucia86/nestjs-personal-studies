@@ -5,7 +5,7 @@
  * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
  */
 
-import { SendNotification } from './../../../application/entities/use-cases/send-notification';
+import { SendNotification } from '@application/entities/use-cases/send-notification';
 import { Body, Controller, Post } from '@nestjs/common';
 import { CreateNotificationBody } from '../dtos/create-notification-body';
 
