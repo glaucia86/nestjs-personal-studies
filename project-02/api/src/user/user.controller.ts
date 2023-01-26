@@ -42,4 +42,11 @@ export class UserController {
       params
     }
   }
+
+  @Delete(':id')
+  async delete(@Param() params) {
+    return {
+      params
+    }
+  }
 }
