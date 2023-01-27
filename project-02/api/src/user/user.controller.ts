@@ -1,6 +1,6 @@
 /**
  * file: src/user/user.controller.ts
- * date: 26/01/2023
+ * date: 01/27/2023
  * description: file responsible for the 'user' controller
  * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
  */

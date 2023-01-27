@@ -1,11 +1,11 @@
-import { UserController } from './user.controller';
 /**
  * file: src/user/user.module.ts
- * date: 26/01/2023
+ * date: 01/26/2023
  * description: file responsible for the user module
  * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
  */
 
+import { UserController } from './user.controller';
 import { Module } from "@nestjs/common";
 
 @Module({

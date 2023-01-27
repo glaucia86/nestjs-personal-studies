@@ -1,3 +1,10 @@
+/**
+ * file: src/app.controller.ts
+ * date: 01/27/2023
+ * description: file responsible for the 'app' controller
+ * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
+ */
+
 import { Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 
