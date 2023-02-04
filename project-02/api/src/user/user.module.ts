@@ -5,13 +5,15 @@
  * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
  */
 
+import { PrismaModule } from './../prisma/prisma.module';
+import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { Module } from "@nestjs/common";
 
 @Module({
-  imports: [],
+  imports: [PrismaModule],
   controllers: [UserController],
-  providers: [],
+  providers: [UserService],
   exports: []
 })
 export class UserModule {
