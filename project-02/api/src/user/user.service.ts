@@ -5,7 +5,7 @@
  * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from './../prisma/prisma.service';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UpdatePatchUserDTO } from './dto/update-patch-user.dto';
@@ -42,6 +42,8 @@ export class UserService {
 
   async updateUser(id: number, { email, name, password, birthday }: UpdatePutUserDTO) {
 
+    await this.validateUserExists(id);
+
     return this.prisma.user.update({
       data: {
         email,
@@ -56,6 +58,8 @@ export class UserService {
   }
 
   async updateUserPartial(id: number, { email, name, password, birthday }: UpdatePatchUserDTO) {
+
+    await this.validateUserExists(id);
 
     const data: any = {};
 
@@ -84,11 +88,20 @@ export class UserService {
   }
 
   async deleteUserById(id: number) {
+
+    await this.validateUserExists(id);
+
     return this.prisma.user.delete({
       where: {
         id,
       }
     });
+  }
+
+  async validateUserExists(id: number) {
+    if (!(await this.listUserById(id))) {
+      throw new NotFoundException(`This user ${id} doesn't exist.`);
+    }
   }
 
 }
