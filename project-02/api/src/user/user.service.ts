@@ -14,13 +14,19 @@ export class UserService {
 
   constructor(private readonly prisma: PrismaService) { }
 
-  async create({ name, email, password }: CreateUserDTO) {
+  async createUser(data: CreateUserDTO) {
     return this.prisma.user.create({
-      data: {
-        name,
-        email,
-        password,
-      },
+      data,
+    });
+  }
+
+  async listUsers() {
+    return this.prisma.user.findMany({
+      orderBy: [
+        {
+          name: 'asc',
+        }
+      ],
     });
   }
 }
