@@ -28,7 +28,7 @@ export class UserController {
 
   @Get(':id')
   async readById(@Param('id', ParseIntPipe) id: number) {
-    return { user: {}, id }
+    return this.userService.listUserById(id);
   }
 
   @Put(':id')
