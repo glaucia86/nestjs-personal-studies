@@ -8,6 +8,8 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from './../prisma/prisma.service';
 import { CreateUserDTO } from './dto/create-user.dto';
+import { UpdatePatchUserDTO } from './dto/update-patch-user.dto';
+import { UpdatePutUserDTO } from './dto/update-put-user.dto';
 
 @Injectable()
 export class UserService {
@@ -37,4 +39,31 @@ export class UserService {
       }
     });
   }
+
+  async updateUser(id: number, data: UpdatePutUserDTO) {
+    return this.prisma.user.update({
+      data,
+      where: {
+        id,
+      },
+    });
+  }
+
+  async updateUserPartial(id: number, data: UpdatePatchUserDTO) {
+    return this.prisma.user.update({
+      data,
+      where: {
+        id,
+      },
+    });
+  }
+
+  async deleteUserById(id: number) {
+    return this.prisma.user.delete({
+      where: {
+        id,
+      }
+    });
+  }
+
 }
