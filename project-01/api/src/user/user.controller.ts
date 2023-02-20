@@ -14,9 +14,6 @@ import {
   Patch,
   Delete,
 } from '@nestjs/common';
-// import { CreateUserDTO } from './dto/create-user.dto';
-// import { UpdatePutUserDTO } from './dto/update-put-user.dto';
-// import { UpdatePatchUserDTO } from './dto/update-patch-user.dto';
 import {
   CreateUserDTO,
   UpdatePutUserDTO,

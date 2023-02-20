@@ -6,29 +6,40 @@
  */
 
 import { Body, Controller, Post } from '@nestjs/common';
-// import { AuthLoginDTO } from './dto/auth-login.dto';
-// import { AuthForgotEmailDTO } from './dto/auth-forgot-email.dto';
-// import { AuthRegisterDTO } from './dto/auth-register.dto';
-// import { AuthResetPasswordDTO } from './dto/auth-reset-password.dto';
 import {
   AuthLoginDTO,
   AuthForgotEmailDTO,
   AuthRegisterDTO,
   AuthResetPasswordDTO
 } from './dto/index'
+import { UserService } from './../user/user.service';
+import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
 
+  constructor(
+    private readonly userService: UserService,
+    private readonly authService: AuthService
+  ) { }
+
   @Post('login')
-  async login(@Body() body: AuthLoginDTO) { }
+  async login(@Body() { email, password }: AuthLoginDTO) {
+    return this.authService.authLogin(email, password);
+  }
 
   @Post('register')
-  async register(@Body() body: AuthRegisterDTO) { }
+  async register(@Body() body: AuthRegisterDTO) {
+    return this.userService.createUser(body);
+  }
 
   @Post('forgot-email')
-  async forgotEmail(@Body() body: AuthForgotEmailDTO) { }
+  async forgotEmail(@Body() { email }: AuthForgotEmailDTO) {
+    return this.authService.authForgotEmail(email)
+  }
 
   @Post('reset-password')
-  async resetPassword(@Body() body: AuthResetPasswordDTO) { }
+  async resetPassword(@Body() { password, token }: AuthResetPasswordDTO) {
+    return this.authService.authResetPassword(password, token);
+  }
 }

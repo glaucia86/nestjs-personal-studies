@@ -8,15 +8,14 @@
 import { PrismaModule } from './../prisma/prisma.module';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
-import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from "@nestjs/common";
 import { UserIdCheckMiddleware } from 'src/middlewares/user-id-check-middleware';
-import { RequestMethod } from '@nestjs/common/enums';
 
 @Module({
   imports: [PrismaModule],
   controllers: [UserController],
   providers: [UserService],
-  exports: []
+  exports: [UserService]
 })
 
 export class UserModule implements NestModule {
