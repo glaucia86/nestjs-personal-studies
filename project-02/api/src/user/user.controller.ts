@@ -14,9 +14,14 @@ import {
   Patch,
   Delete,
 } from '@nestjs/common';
-import { CreateUserDTO } from './dto/create-user.dto';
-import { UpdatePutUserDTO } from './dto/update-put-user.dto';
-import { UpdatePatchUserDTO } from './dto/update-patch-user.dto';
+// import { CreateUserDTO } from './dto/create-user.dto';
+// import { UpdatePutUserDTO } from './dto/update-put-user.dto';
+// import { UpdatePatchUserDTO } from './dto/update-patch-user.dto';
+import {
+  CreateUserDTO,
+  UpdatePutUserDTO,
+  UpdatePatchUserDTO
+} from './dto/index';
 import { UserService } from './user.service';
 import { ParamId } from 'src/decorators/param-id-decorator';
 
