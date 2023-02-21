@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 /**
  * file: src/auth/auth.module.ts
  * date: 02/13/2023
@@ -19,5 +20,6 @@ import { AuthController } from './auth.controller';
     PrismaModule
   ],
   controllers: [AuthController],
+  providers: [AuthService],
 })
 export class AuthModule { }
