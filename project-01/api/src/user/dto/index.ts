@@ -5,6 +5,6 @@
  * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
  */
 
-export * from "./create-user.dto";
-export * from "./update-patch-user.dto";
-export * from "./update-put-user.dto";
+export * from "./create.user.dto";
+export * from "./update.patch.user.dto";
+export * from "./update.put.user.dto";

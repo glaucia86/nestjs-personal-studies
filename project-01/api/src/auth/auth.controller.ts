@@ -5,14 +5,13 @@
  * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
  */
 
-import { Body, Req, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import {
   AuthLoginDTO,
   AuthForgotEmailDTO,
   AuthRegisterDTO,
   AuthResetPasswordDTO
 } from './dto/index'
-import { UserService } from './../user/user.service';
 import { AuthService } from './auth.service';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { User } from 'src/decorators/user.decorator';
@@ -21,7 +20,6 @@ import { User } from 'src/decorators/user.decorator';
 export class AuthController {
 
   constructor(
-    private readonly userService: UserService,
     private readonly authService: AuthService
   ) { }
 

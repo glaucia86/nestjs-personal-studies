@@ -9,7 +9,7 @@ import { PrismaModule } from './../prisma/prisma.module';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from "@nestjs/common";
-import { UserIdCheckMiddleware } from 'src/middlewares/user-id-check-middleware';
+import { UserIdCheckMiddleware } from 'src/middlewares/user.id.check.middleware';
 
 @Module({
   imports: [PrismaModule],

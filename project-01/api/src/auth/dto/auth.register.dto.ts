@@ -5,6 +5,6 @@
  * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
  */
 
-import { CreateUserDTO } from "src/user/dto/create-user.dto";
+import { CreateUserDTO } from "src/user/dto/create.user.dto";
 
 export class AuthRegisterDTO extends CreateUserDTO { }
