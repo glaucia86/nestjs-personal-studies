@@ -5,7 +5,7 @@
  * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
  */
 
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Headers, Controller, Post } from '@nestjs/common';
 import {
   AuthLoginDTO,
   AuthForgotEmailDTO,
@@ -44,7 +44,8 @@ export class AuthController {
   }
 
   @Post('me')
-  async me(@Body() body) {
-    return this.authService.checkToken(body.token);
+  async me(@Headers("authorization") token) {
+    // split the token and remove the 'Bearer' word
+    return this.authService.checkToken((token ?? '').split(' ')[1]);
   }
 }
