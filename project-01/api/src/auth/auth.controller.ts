@@ -5,7 +5,7 @@
  * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
  */
 
-import { Body, Headers, Controller, Post } from '@nestjs/common';
+import { Body, Req, Controller, Post, UseGuards } from '@nestjs/common';
 import {
   AuthLoginDTO,
   AuthForgotEmailDTO,
@@ -14,6 +14,7 @@ import {
 } from './dto/index'
 import { UserService } from './../user/user.service';
 import { AuthService } from './auth.service';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -43,9 +44,12 @@ export class AuthController {
     return this.authService.authResetPassword(password, token);
   }
 
+  @UseGuards(AuthGuard)
   @Post('me')
-  async me(@Headers("authorization") token) {
+  async me(@Req() req) {
     // split the token and remove the 'Bearer' word
-    return this.authService.checkToken((token ?? '').split(' ')[1]);
+    // return this.authService.checkToken((token ?? '').split(' ')[1]);
+
+    return { me: 'ok', data: req.tokenPayload }
   }
 }
