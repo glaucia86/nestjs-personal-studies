@@ -20,7 +20,7 @@ import {
   UpdatePatchUserDTO
 } from './dto/index';
 import { UserService } from './user.service';
-import { ParamId } from 'src/decorators/param-id-decorator';
+import { ParamId } from 'src/decorators/param.id.decorator';
 
 @Controller('users')
 export class UserController {

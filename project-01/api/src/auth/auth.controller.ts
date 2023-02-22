@@ -15,6 +15,7 @@ import {
 import { UserService } from './../user/user.service';
 import { AuthService } from './auth.service';
 import { AuthGuard } from 'src/guards/auth.guard';
+import { User } from 'src/decorators/user.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -46,10 +47,11 @@ export class AuthController {
 
   @UseGuards(AuthGuard)
   @Post('me')
-  async me(@Req() req) {
-    // split the token and remove the 'Bearer' word
-    // return this.authService.checkToken((token ?? '').split(' ')[1]);
-
-    return { me: 'ok', data: req.tokenPayload }
+  async me(@User('email') user) {
+    return {
+      me: 'ok',
+      data: user.tokenPayload,
+      user: user
+    };
   }
 }
