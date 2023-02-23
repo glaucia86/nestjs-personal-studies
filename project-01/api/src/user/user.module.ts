@@ -8,11 +8,12 @@
 import { PrismaModule } from './../prisma/prisma.module';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
-import { MiddlewareConsumer, Module, NestModule, RequestMethod } from "@nestjs/common";
+import { forwardRef, MiddlewareConsumer, Module, NestModule, RequestMethod } from "@nestjs/common";
 import { UserIdCheckMiddleware } from 'src/middlewares/user.id.check.middleware';
+import { AuthModule } from './../auth/auth.module';
 
 @Module({
-  imports: [PrismaModule],
+  imports: [PrismaModule, forwardRef(() => AuthModule)],
   controllers: [UserController],
   providers: [UserService],
   exports: [UserService]
