@@ -5,7 +5,8 @@
  * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
  */
 
-import { IsString, IsEmail, IsOptional, IsDateString, MinLength } from "class-validator";
+import { IsString, IsEmail, IsOptional, IsDateString, MinLength, IsEnum } from "class-validator";
+import { Role } from './../../enums/role.enum';
 
 export class CreateUserDTO {
 
@@ -22,4 +23,9 @@ export class CreateUserDTO {
   @IsOptional()
   @IsDateString()
   birthday: string;
+
+  @IsOptional()
+  @IsEnum(Role)
+  role: number;
+
 }
