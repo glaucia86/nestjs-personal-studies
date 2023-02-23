@@ -32,6 +32,24 @@
 $ npm install
 ```
 
+## Update Prisma 
+
+Under the `api` folder, run the following command to use the Database:
+
+```bash
+npx prisma migrate dev
+```
+
+And then run the following command to generate the Prisma Client:
+
+```bash
+npx prisma generate
+```
+
+Don't forget to include your database credentials in the `.env` file. You can see the example in the `.env_template` file.
+
+Now you can start to use the Database with Prisma Client.
+
 ## Running the app
 
 ```bash
