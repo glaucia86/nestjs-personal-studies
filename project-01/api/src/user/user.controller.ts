@@ -13,6 +13,7 @@ import {
   Put,
   Patch,
   Delete,
+  UseGuards
 } from '@nestjs/common';
 import {
   CreateUserDTO,
@@ -23,7 +24,10 @@ import { UserService } from './user.service';
 import { ParamId } from 'src/decorators/param.id.decorator';
 import { Roles } from 'src/decorators/roles.decorator';
 import { Role } from 'src/enums/role.enum';
+import { RoleGuard } from 'src/guards/role.guard';
+import { AuthGuard } from 'src/guards/auth.guard';
 
+@UseGuards(AuthGuard, RoleGuard)
 @Controller('users')
 export class UserController {
 
