@@ -7,5 +7,5 @@
 
 export * from "./auth.login.dto";
 export * from "./auth.register.dto";
-export * from "./auth.forgot.email.dto";
+export * from "./auth-forgot-email.dto";
 export * from "./auth.reset.password.dto";

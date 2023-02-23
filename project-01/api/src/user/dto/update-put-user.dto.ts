@@ -5,6 +5,6 @@
  * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
  */
 
-import { CreateUserDTO } from "./create.user.dto";
+import { CreateUserDTO } from "./create-user.dto";
 
 export class UpdatePutUserDTO extends CreateUserDTO { }
