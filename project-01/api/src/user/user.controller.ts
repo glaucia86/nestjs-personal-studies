@@ -23,7 +23,7 @@ import {
 } from './dto/index';
 import { UserService } from './user.service';
 import { ParamId } from '../decorators/param.id.decorator';
-import { Roles } from '../decorators/role.decorator';
+import { Roles } from '../decorators/roles.decorator';
 import { Role } from '../enums/role.enum';
 import { RoleGuard } from '../guards/role.guard';
 import { AuthGuard } from '../guards/auth.guard';
