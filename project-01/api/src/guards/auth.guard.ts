@@ -6,8 +6,8 @@
  */
 
 import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
-import { AuthService } from "src/auth/auth.service";
-import { UserService } from 'src/user/user.service';
+import { AuthService } from "../auth/auth.service";
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -27,7 +27,6 @@ export class AuthGuard implements CanActivate {
       // using 'checkToken here to collect the user data who is trying to access the route
       const data = this.authService.checkToken((authorization ?? '').split(' ')[1]);
       request.tokenPayload = data;
-
       request.user = await this.userService.listUserById(data.id)
 
       return true

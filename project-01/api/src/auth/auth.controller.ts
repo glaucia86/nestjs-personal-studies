@@ -45,11 +45,7 @@ export class AuthController {
 
   @UseGuards(AuthGuard)
   @Post('me')
-  async me(@User('email') user) {
-    return {
-      me: 'ok',
-      data: user.tokenPayload,
-      user: user
-    };
+  async me(@User() user) {
+    return { user };
   }
 }

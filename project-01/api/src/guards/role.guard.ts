@@ -1,35 +1,29 @@
-/**
- * file: src/guards/role.guard.ts
- * date: 02/23/2023
- * description: file responsible for the 'role' guard
- * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
- */
-
-import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
-import { Reflector } from "@nestjs/core";
-import { ROLES_KEY } from "src/decorators/roles.decorator";
-import { Role } from "src/enums/role.enum";
+import { CanActivate, Injectable, ExecutionContext } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
+import { ROLES_KEY } from '../decorators/role.decorator';
+import { Role } from '../enums/role.enum';
 
 @Injectable()
 export class RoleGuard implements CanActivate {
-
-  constructor(
-    private readonly reflactor: Reflector,
-  ) { }
-
+  constructor(private readonly reflector: Reflector) { }
 
   async canActivate(context: ExecutionContext) {
 
-    const requiredRoles = this.reflactor.getAllAndOverride<Role[]>(ROLES_KEY, [context.getHandler(), context.getClass()]);
+    const requiredRoles = this.reflector.getAllAndOverride<Role[]>(ROLES_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+
+    console.log({ requiredRoles });
 
     if (!requiredRoles) {
       return true;
     }
 
-    const user = context.switchToHttp().getRequest();
+    const { user } = context.switchToHttp().getRequest();
 
-    console.log({ requiredRoles, user })
+    const rolesFilted = requiredRoles.filter((role) => role === user.role);
 
-    return true;
+    return rolesFilted.length > 0;
   }
 }

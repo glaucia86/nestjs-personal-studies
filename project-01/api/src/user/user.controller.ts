@@ -6,14 +6,15 @@
  */
 
 import {
-  Body,
   Controller,
-  Get,
   Post,
+  Body,
+  Get,
   Put,
   Patch,
   Delete,
-  UseGuards
+  UseGuards,
+  UseInterceptors
 } from '@nestjs/common';
 import {
   CreateUserDTO,
@@ -21,51 +22,50 @@ import {
   UpdatePatchUserDTO
 } from './dto/index';
 import { UserService } from './user.service';
-import { ParamId } from 'src/decorators/param.id.decorator';
-import { Roles } from 'src/decorators/roles.decorator';
-import { Role } from 'src/enums/role.enum';
-import { RoleGuard } from 'src/guards/role.guard';
-import { AuthGuard } from 'src/guards/auth.guard';
+import { ParamId } from '../decorators/param.id.decorator';
+import { Roles } from '../decorators/role.decorator';
+import { Role } from '../enums/role.enum';
+import { RoleGuard } from '../guards/role.guard';
+import { AuthGuard } from '../guards/auth.guard';
+import { LogInterceptor } from './../interceptors/log.interceptor';
 
+@Roles(Role.Admin)
 @UseGuards(AuthGuard, RoleGuard)
+@UseInterceptors(LogInterceptor)
 @Controller('users')
 export class UserController {
-
   constructor(private readonly userService: UserService) { }
 
-  @Roles(Role.Admin)
   @Post()
   async create(@Body() data: CreateUserDTO) {
     return this.userService.createUser(data);
   }
 
-  @Roles(Role.Admin)
   @Get()
   async list() {
     return this.userService.listUsers();
   }
 
-  @Roles(Role.Admin)
   @Get(':id')
-  async readById(@ParamId() id: number) {
+  async listById(@ParamId() id: number) {
+    console.log({ id });
     return this.userService.listUserById(id);
   }
 
-  @Roles(Role.Admin)
   @Put(':id')
   async update(@Body() data: UpdatePutUserDTO, @ParamId() id: number) {
     return this.userService.updateUser(id, data);
   }
 
-  @Roles(Role.Admin)
   @Patch(':id')
   async updatePartial(@Body() data: UpdatePatchUserDTO, @ParamId() id: number) {
     return this.userService.updateUserPartial(id, data);
   }
 
-  @Roles(Role.Admin)
   @Delete(':id')
   async delete(@ParamId() id: number) {
-    return this.userService.deleteUserById(id);
+    return {
+      success: this.userService.deleteUserById(id),
+    };
   }
 }

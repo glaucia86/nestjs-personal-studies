@@ -13,10 +13,11 @@ import { PrismaModule } from './../prisma/prisma.module';
 import { AuthController } from './auth.controller';
 
 @Module({
-  imports: [JwtModule.register({
-    secret: `^6wRLcr(u8,:b+Br[%.jyWj]#}?QSk~X`
-  }),
-  forwardRef(() => UserModule),
+  imports: [
+    JwtModule.register({
+      secret: `^6wRLcr(u8,:b+Br[%.jyWj]#}?QSk~X`
+    }),
+    forwardRef(() => UserModule),
     PrismaModule
   ],
   controllers: [AuthController],
