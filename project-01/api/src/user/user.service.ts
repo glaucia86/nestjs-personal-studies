@@ -5,13 +5,14 @@
  * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
  */
 
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from './../prisma/prisma.service';
 import {
   CreateUserDTO,
   UpdatePatchUserDTO,
   UpdatePutUserDTO
 } from './dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from './../prisma/prisma.service';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -19,14 +20,14 @@ export class UserService {
     private readonly prisma: PrismaService
   ) { }
 
-  async createUser({ email, name, password, birthday }: CreateUserDTO) {
+  async createUser(data: CreateUserDTO) {
+
+    const salt = await bcrypt.genSalt();
+
+    data.password = await bcrypt.hash(data.password, salt);
+
     return this.prisma.user.create({
-      data: {
-        email,
-        name,
-        password,
-        birthday: birthday ? new Date(birthday) : null
-      }
+      data,
     });
   }
 
@@ -54,6 +55,10 @@ export class UserService {
   async updateUser(id: number, { email, name, password, birthday, role }: UpdatePutUserDTO) {
 
     await this.validateUserExists(id);
+
+    const salt = await bcrypt.genSalt();
+
+    password = await bcrypt.hash(password, salt);
 
     return this.prisma.user.update({
       data: {
@@ -88,7 +93,8 @@ export class UserService {
     }
 
     if (password) {
-      data.password = password;
+      const salt = await bcrypt.genSalt();
+      data.password = await bcrypt.hash(password, salt);
     }
 
     if (role) {
