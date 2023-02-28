@@ -15,7 +15,7 @@ import { AuthController } from './auth.controller';
 @Module({
   imports: [
     JwtModule.register({
-      secret: `^6wRLcr(u8,:b+Br[%.jyWj]#}?QSk~X`
+      secret: process.env.JWT_SECRET
     }),
     forwardRef(() => UserModule),
     PrismaModule
