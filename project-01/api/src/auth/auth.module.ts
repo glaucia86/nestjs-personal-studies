@@ -1,4 +1,3 @@
-import { AuthService } from './auth.service';
 /**
  * file: src/auth/auth.module.ts
  * date: 02/13/2023
@@ -11,6 +10,8 @@ import { JwtModule } from '@nestjs/jwt'
 import { UserModule } from 'src/user/user.module';
 import { PrismaModule } from './../prisma/prisma.module';
 import { AuthController } from './auth.controller';
+import { FileModule } from './../file/file.module';
+import { AuthService } from './auth.service';
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { AuthController } from './auth.controller';
       secret: process.env.JWT_SECRET
     }),
     forwardRef(() => UserModule),
-    PrismaModule
+    PrismaModule,
+    FileModule
   ],
   controllers: [AuthController],
   providers: [AuthService],
