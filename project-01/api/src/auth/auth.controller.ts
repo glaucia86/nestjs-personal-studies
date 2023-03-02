@@ -13,7 +13,10 @@ import {
   UseInterceptors,
   UploadedFile,
   BadRequestException,
-  UploadedFiles
+  UploadedFiles,
+  ParseFilePipe,
+  FileTypeValidator,
+  MaxFileSizeValidator
 } from '@nestjs/common';
 import {
   AuthLoginDTO,
@@ -65,7 +68,15 @@ export class AuthController {
   @UseInterceptors(FileInterceptor('file'))
   @UseGuards(AuthGuard)
   @Post('photo')
-  async uploadPhoto(@User() user, @UploadedFile() photo: Express.Multer.File) {
+  async uploadPhoto(
+    @User() user,
+    @UploadedFile(new ParseFilePipe({
+      validators: [
+        new FileTypeValidator({ fileType: 'image/png' }),
+        //new MaxFileSizeValidator({ maxSize: 300000 })
+      ]
+    })) photo: Express.Multer.File
+  ) {
 
     const path = join(__dirname, '..', '..', 'storage', 'photos', `photo-${user.id}.png`);
 
@@ -83,7 +94,6 @@ export class AuthController {
   @Post('files')
   async uploadFiles(@User() user, @UploadedFiles() files: Express.Multer.File[]) {
     return files;
-
   }
 
   @UseInterceptors(FileFieldsInterceptor([{
@@ -97,6 +107,5 @@ export class AuthController {
   @Post('files-fields')
   async uploadFilesFields(@User() user, @UploadedFiles() files: { photo: Express.Multer.File, documents: Express.Multer.File[] }) {
     return files;
-
   }
 }
