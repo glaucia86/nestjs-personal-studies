@@ -1,4 +1,4 @@
-# User API with Authentication and Authorization
+# User API with Authentication and Authorization integrated with Azure Database for PostgreSQL
 
 In this project we will create a user API with authentication and authorization. We will use the following technologies:
 
