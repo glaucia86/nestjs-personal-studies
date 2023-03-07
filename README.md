@@ -21,4 +21,4 @@ Here, follow articles, books, videos, tutorials, and courses based on these Nest
 
 ## Projects Developed
 
-- **[Project 01: User API](./project-01/README.md)**
+- **[Project 01: User API com Nest.js & Prisma](./project-01/README.md)**
