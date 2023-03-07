@@ -11,6 +11,8 @@ import { UserModule } from 'src/user/user.module';
 import { AuthController } from './auth.controller';
 import { FileModule } from './../file/file.module';
 import { AuthService } from './auth.service';
+import { UserEntity } from 'src/user/dto/entity/user.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
@@ -18,7 +20,8 @@ import { AuthService } from './auth.service';
       secret: process.env.JWT_SECRET
     }),
     forwardRef(() => UserModule),
-    FileModule
+    FileModule,
+    TypeOrmModule.forFeature([UserEntity])
   ],
   controllers: [AuthController],
   providers: [AuthService],
