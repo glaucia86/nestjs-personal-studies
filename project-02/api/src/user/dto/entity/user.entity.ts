@@ -5,9 +5,12 @@
  * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
  */
 
+import { Role } from "src/enums/role.enum";
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity()
+@Entity({
+  name: 'users'
+})
 export class UserEntity {
 
   @PrimaryGeneratedColumn({
@@ -35,10 +38,10 @@ export class UserEntity {
     type: 'date',
     nullable: true
   })
-  birthday: string;
+  birthday: Date;
 
   @Column({
-    enum: [1, 2]
+    default: Role.User
   })
   role: number
 
