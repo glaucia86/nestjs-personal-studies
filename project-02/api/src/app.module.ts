@@ -49,6 +49,7 @@ import { UserEntity } from './user/dto/entity/user.entity';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       entities: [UserEntity],
+      ssl: true,
       synchronize: process.env.ENV === 'development',
     })
   ],
