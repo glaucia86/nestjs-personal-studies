@@ -1,16 +1,7 @@
-/**
- * file: src/typeorm/data-source.ts
- * date: 03/09/2023
- * description: file responsible for the connection with the database using the TypeORM
- * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
- */
-
+import { DataSource } from "typeorm";
 import * as dotenv from 'dotenv'
-import { DataSource } from 'typeorm';
 
-dotenv.config({
-  path: process.env.ENV === 'test' ? '.env.test' : '.env'
-});
+dotenv.config();
 
 const dataSource = new DataSource({
   type: 'postgres',
@@ -20,7 +11,7 @@ const dataSource = new DataSource({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   ssl: true,
-  migrations: [__dirname + './migrations/**/*.ts'],
+  migrations: [`${__dirname}/migrations/**/*.ts`],
 });
 
 export default dataSource;
