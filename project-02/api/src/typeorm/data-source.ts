@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm";
 import * as dotenv from 'dotenv'
-import { Migrations021678396689118 } from "./migrations/1678396689118-Migrations_02";
+import migrations from './typeormMigrations';
 
 dotenv.config();
 
@@ -12,7 +12,7 @@ const dataSource = new DataSource({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   ssl: true,
-  migrations: [Migrations021678396689118],
+  migrations: migrations,
 });
 
 export default dataSource;

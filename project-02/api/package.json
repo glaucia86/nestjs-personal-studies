@@ -18,11 +18,11 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm": "ts-node ./node_modules/typeorm/cli.js",
-    "clear:db:test": "npm run typeorm schema:drop",
+    "typeorm": "typeorm-ts-node-esm",
     "migration:create": "npm run typeorm migration:create",
     "migration:up": "npm run typeorm migration:run -- -d ./src/typeorm/data-source",
-    "migration:down": "npm run typeorm migration:revert -- -d ./src/typeorm/data-source"
+    "migration:down": "npm run typeorm migration:revert -- -d ./src/typeorm/data-source",
+    "clear:db:test": "npm run typeorm:ts schema:drop -- -d ./typeorm/data-source.ts"
   },
   "dependencies": {
     "@nestjs-modules/mailer": "^1.8.1",
