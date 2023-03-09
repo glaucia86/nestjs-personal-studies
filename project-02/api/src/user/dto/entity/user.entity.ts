@@ -41,7 +41,7 @@ export class UserEntity {
   birthday: Date;
 
   @Column({
-    default: Role.User
+    default: 1
   })
   role: number
 
