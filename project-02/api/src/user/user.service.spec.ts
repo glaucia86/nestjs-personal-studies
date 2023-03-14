@@ -8,12 +8,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { userRepositoryMock } from '../testing/user-repository.mock';
 import { UserService } from './user.service';
-import { userEntityList } from '../testing/user-entity-list.mock';
+import { userEntityMockList } from '../testing/user-entity-list.mock';
 import { createUserMockDto } from '../testing/create-user-dto.mock';
+import { Repository } from 'typeorm';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import { updatePutUserDTO } from '../testing/update-put-user-dto.mock';
+import { updatePatchUserDTO } from '../testing/update-patch-user-dto.mock';
+import { UserEntity } from './dto/entity/user.entity';
 
 describe('UserService', () => {
 
   let userService: UserService;
+  let userRepository: Repository<UserEntity>
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -21,26 +27,63 @@ describe('UserService', () => {
     }).compile();
 
     userService = module.get<UserService>(UserService);
-
+    userRepository = module.get(getRepositoryToken(UserEntity));
   });
 
   test('Validate User Service definition', () => {
     expect(userService).toBeDefined();
+    expect(userRepository).toBeDefined();
   });
 
-  describe('Validate Create a new User', () => {
+  describe('Create a new User', () => {
     test('Method: CreateUser', async () => {
+
+      jest.spyOn(userRepository, 'exist').mockResolvedValueOnce(false);
 
       const result = await userService.createUser(createUserMockDto);
 
-      expect(result).toEqual(userEntityList[0]);
+      expect(result).toEqual(userEntityMockList[0]);
     })
   });
 
+  describe('List Users', () => {
+    test('Method: ListUsers', async () => {
 
+      const result = await userService.listUsers();
 
-  //describe('Read', () => { });
-  //describe('Update', () => { });
-  //describe('Delete', () => { });
+      expect(result).toEqual(userEntityMockList);
+    });
 
+    test('Method: listUserById', async () => {
+
+      const result = await userService.listUserById(1)
+
+      expect(result).toEqual(userEntityMockList[0]);
+    });
+  });
+
+  describe('Update User', () => {
+    test('Method: UpdateUser', async () => {
+
+      const result = await userService.updateUser(1, updatePutUserDTO)
+
+      expect(result).toEqual(userEntityMockList[0]);
+    });
+
+    test('Method: updateUserPartial', async () => {
+
+      const result = await userService.updateUserPartial(1, updatePatchUserDTO)
+
+      expect(result).toEqual(userEntityMockList[0]);
+    });
+  });
+
+  describe('Delete User', () => {
+    test('Method: DeleteUserById', async () => {
+
+      const result = await userService.deleteUserById(1);
+
+      expect(result).toEqual(true);
+    });
+  });
 });
