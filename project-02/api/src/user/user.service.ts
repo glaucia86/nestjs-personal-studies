@@ -116,7 +116,9 @@ export class UserService {
 
     await this.validateUserExists(id);
 
-    return this.userRepository.delete(id);
+    await this.userRepository.delete(id);
+
+    return true;
   }
 
   async validateUserExists(id: number) {
