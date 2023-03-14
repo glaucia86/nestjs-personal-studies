@@ -5,10 +5,11 @@
  * author: Glaucia Lemos <Twitter: @glaucia_lemos86>
  */
 
-
 import { Test, TestingModule } from '@nestjs/testing';
 import { userRepositoryMock } from '../testing/user-repository.mock';
 import { UserService } from './user.service';
+import { userEntityList } from '../testing/user-entity-list.mock';
+import { createUserMockDto } from '../testing/create-user-dto.mock';
 
 describe('UserService', () => {
 
@@ -26,4 +27,20 @@ describe('UserService', () => {
   test('Validate User Service definition', () => {
     expect(userService).toBeDefined();
   });
+
+  describe('Validate Create a new User', () => {
+    test('Method: CreateUser', async () => {
+
+      const result = await userService.createUser(createUserMockDto);
+
+      expect(result).toEqual(userEntityList[0]);
+    })
+  });
+
+
+
+  //describe('Read', () => { });
+  //describe('Update', () => { });
+  //describe('Delete', () => { });
+
 });

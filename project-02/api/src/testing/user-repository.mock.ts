@@ -7,13 +7,14 @@
 
 import { getRepositoryToken } from "@nestjs/typeorm"
 import { UserEntity } from "../user/dto/entity/user.entity"
+import { userEntityList } from "./user-entity-list.mock"
 
 export const userRepositoryMock = {
 
   provide: getRepositoryToken(UserEntity),
   useValue: {
     create: jest.fn(),
-    save: jest.fn(),
+    save: jest.fn().mockResolvedValue(userEntityList[0]),
     find: jest.fn(),
     findOneBy: jest.fn(),
     update: jest.fn(),
