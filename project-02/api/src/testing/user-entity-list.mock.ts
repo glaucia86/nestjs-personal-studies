@@ -8,7 +8,7 @@
 import { Role } from "../enums/role.enum";
 import { UserEntity } from "../user/dto/entity/user.entity";
 
-export const userEntityList: UserEntity[] = [{
+export const userEntityMockList: UserEntity[] = [{
   name: 'Glaucia Lemos',
   email: 'glaucia.lemos@email.com',
   birthday: new Date('1986-10-24'),
