@@ -7,12 +7,12 @@
 
 import { forwardRef, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt'
-import { UserModule } from 'src/user/user.module';
 import { AuthController } from './auth.controller';
 import { FileModule } from './../file/file.module';
 import { AuthService } from './auth.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from '../user/dto/entity/user.entity';
+import { UserModule } from '../user/user.module';
 
 @Module({
   imports: [

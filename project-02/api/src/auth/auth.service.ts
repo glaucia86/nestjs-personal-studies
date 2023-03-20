@@ -8,13 +8,13 @@
 import { Injectable } from '@nestjs/common';
 import { UnauthorizedException, BadRequestException } from '@nestjs/common/exceptions';
 import { JwtService } from '@nestjs/jwt';
-import { UserService } from 'src/user/user.service';
 import { AuthRegisterDTO } from './dto';
 import * as bcrypt from 'bcrypt';
 import { MailerService } from '@nestjs-modules/mailer';
 import { UserEntity } from './../user/dto/entity/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class AuthService {

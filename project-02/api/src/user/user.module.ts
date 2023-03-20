@@ -8,10 +8,10 @@
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { forwardRef, MiddlewareConsumer, Module, NestModule, RequestMethod } from "@nestjs/common";
-import { UserIdCheckMiddleware } from 'src/middlewares/user.id.check.middleware';
 import { AuthModule } from './../auth/auth.module';
 import { UserEntity } from './dto/entity/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserIdCheckMiddleware } from '../middlewares/user.id.check.middleware';
 
 @Module({
   imports: [

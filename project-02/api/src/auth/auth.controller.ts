@@ -16,7 +16,7 @@ import {
   UploadedFiles,
   ParseFilePipe,
   FileTypeValidator,
-  MaxFileSizeValidator
+  Req,
 } from '@nestjs/common';
 import {
   AuthLoginDTO,
@@ -26,10 +26,14 @@ import {
 } from './dto/index'
 import { AuthService } from './auth.service';
 import { FileService } from './../file/file.service';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { User } from 'src/decorators/user.decorator';
-import { FileFieldsInterceptor, FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import {
+  FileInterceptor,
+  FilesInterceptor,
+  FileFieldsInterceptor,
+} from '@nestjs/platform-express';
 import { join } from 'path';
+import { User } from '../decorators/user.decorator';
+import { AuthGuard } from '../guards/auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -61,8 +65,8 @@ export class AuthController {
 
   @UseGuards(AuthGuard)
   @Post('me')
-  async me(@User() user) {
-    return { user };
+  async me(@User() user, @Req() { tokenPayload }) {
+    return { user, tokenPayload };
   }
 
   @UseInterceptors(FileInterceptor('file'))
