@@ -6,7 +6,7 @@
  */
 
 import { Role } from "../enums/role.enum";
-import { UserEntity } from "../user/dto/entity/user.entity";
+import { UserEntity } from "../user/entity/user.entity";
 
 export const userEntityMockList: UserEntity[] = [{
   name: 'Glaucia Lemos',

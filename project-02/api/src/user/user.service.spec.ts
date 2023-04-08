@@ -9,12 +9,12 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { userRepositoryMock } from '../testing/user-repository.mock';
 import { UserService } from './user.service';
 import { userEntityMockList } from '../testing/user-entity-list.mock';
-import { createUserMockDto } from '../testing/create-user-dto.mock';
+import { createUserMockDTO } from '../testing/create-user-dto.mock';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { updatePutUserDTO } from '../testing/update-put-user-dto.mock';
-import { updatePatchUserDTO } from '../testing/update-patch-user-dto.mock';
-import { UserEntity } from './dto/entity/user.entity';
+import { updatePutUserMockDTO } from '../testing/update-put-user-dto.mock';
+import { updatePatchUserMockDTO } from '../testing/update-patch-user-dto.mock';
+import { UserEntity } from './entity/user.entity';
 
 describe('UserService', () => {
 
@@ -40,7 +40,7 @@ describe('UserService', () => {
 
       jest.spyOn(userRepository, 'exist').mockResolvedValueOnce(false);
 
-      const result = await userService.createUser(createUserMockDto);
+      const result = await userService.createUser(createUserMockDTO);
 
       expect(result).toEqual(userEntityMockList[0]);
     })
@@ -65,14 +65,14 @@ describe('UserService', () => {
   describe('Update User', () => {
     test('Method: UpdateUser', async () => {
 
-      const result = await userService.updateUser(1, updatePutUserDTO)
+      const result = await userService.updateUser(1, updatePutUserMockDTO)
 
       expect(result).toEqual(userEntityMockList[0]);
     });
 
     test('Method: updateUserPartial', async () => {
 
-      const result = await userService.updateUserPartial(1, updatePatchUserDTO)
+      const result = await userService.updateUserPartial(1, updatePatchUserMockDTO)
 
       expect(result).toEqual(userEntityMockList[0]);
     });

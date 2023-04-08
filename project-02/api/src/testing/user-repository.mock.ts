@@ -6,7 +6,7 @@
  */
 
 import { getRepositoryToken } from "@nestjs/typeorm"
-import { UserEntity } from "../user/dto/entity/user.entity"
+import { UserEntity } from "../user/entity/user.entity"
 import { userEntityMockList } from "./user-entity-list.mock"
 
 export const userRepositoryMock = {

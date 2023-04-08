@@ -8,7 +8,7 @@
 import { Role } from "../enums/role.enum";
 import { CreateUserDTO } from "../user/dto";
 
-export const createUserMockDto: CreateUserDTO = {
+export const createUserMockDTO: CreateUserDTO = {
   name: 'Fulano Lemos',
   email: 'fulano.lemos@email.com',
   birthday: '1986-10-10',

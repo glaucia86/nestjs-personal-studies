@@ -11,7 +11,7 @@ import { AuthController } from './auth.controller';
 import { FileModule } from './../file/file.module';
 import { AuthService } from './auth.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserEntity } from '../user/dto/entity/user.entity';
+import { UserEntity } from '../user/entity/user.entity';
 import { UserModule } from '../user/user.module';
 
 @Module({

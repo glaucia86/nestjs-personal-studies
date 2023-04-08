@@ -8,7 +8,7 @@
 import { Role } from '../enums/role.enum';
 import { UpdatePutUserDTO } from './../user/dto/update-put-user.dto';
 
-export const updatePutUserDTO: UpdatePutUserDTO = {
+export const updatePutUserMockDTO: UpdatePutUserDTO = {
   name: 'Glaucia Lemos',
   email: 'glaucia.lemos@email.com',
   birthday: '2000-10-24',
