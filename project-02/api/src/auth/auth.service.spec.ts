@@ -14,6 +14,8 @@ import { mailerServiceMock } from "../testing/mailer-service.mock";
 import { accessToken } from './../testing/access-token.mock';
 import { userEntityMockList } from './../testing/user-entity-list.mock';
 import { jwtPayloadMock } from './../testing/jwt-payload.mock';
+import { resetMockToken } from "../testing/reset-token.mock";
+import { authRegisterMockDTO } from "../testing/auth-register-dto.mock";
 
 describe('AuthService', () => {
   let authService: AuthService;
@@ -54,7 +56,33 @@ describe('AuthService', () => {
 
       expect(result).toEqual(true);
     });
+  });
 
-    // describe('Authentication', () => { });
+  describe('Authentication', () => {
+
+    test('authLogin Method', async () => {
+      const result = await authService.authLogin('glaucia@email.com', '123456');
+
+      expect(result).toEqual({ accessToken });
+    });
+
+    test('authForgotEmail Method', async () => {
+      const result = await authService.authForgotEmail('glaucia@email.com');
+
+      expect(result).toEqual(true);
+    });
+
+    test('authResetPassword Method', async () => {
+      const result = await authService.authResetPassword('654321', resetMockToken);
+
+      expect(result).toEqual({ accessToken });
+    });
+
+    test('authRegister Method', async () => {
+      const result = await authService.authRegister(authRegisterMockDTO);
+
+      expect(result).toEqual({ accessToken });
+    });
+
   });
 });
