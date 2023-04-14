@@ -8,7 +8,7 @@
 import { join } from "path";
 import { getFileToBuffer } from "./get-file-to-buffer";
 
-export const getPhoto = async () => {
+export const getMockPhoto = async () => {
 
   const { buffer, stream } = await getFileToBuffer(join(__dirname, 'photo.png'));
 
